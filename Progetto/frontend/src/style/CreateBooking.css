@@ -1,0 +1,144 @@
+/* CreateBooking.css */
+
+.create-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, #f4f7fc, #eef2f3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+.create-card {
+  background: white;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px; 
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(102, 166, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.create-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #89f7fe 0%, #66a6ff 100%);
+}
+
+.form-title {
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #333;
+  text-align: center;
+}
+
+.form-title span {
+  background: linear-gradient(90deg, #a18cd1 0%, #a1c4fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.form-input {
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #dae1e7;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s;
+  background-color: #f9fbff; 
+  font-family: inherit;
+}
+
+.form-input:focus {
+  /* Focus blu */
+  border-color: #66a6ff;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(102, 166, 255, 0.15);
+}
+
+.form-input[readonly] {
+  background-color: #eef2f5;
+  color: #777;
+  cursor: not-allowed;
+  border-color: #e1e4e8;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  padding: 14px;
+  background: linear-gradient(90deg, #66a6ff 0%, #89f7fe 100%);
+  color: white; 
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(102, 166, 255, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 166, 255, 0.6);
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.msg-box {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.95rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.msg-box.error {
+  background-color: #fff0f3;
+  color: #d63384;
+  border: 1px solid #fbc2eb; 
+}
+
+.msg-box.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

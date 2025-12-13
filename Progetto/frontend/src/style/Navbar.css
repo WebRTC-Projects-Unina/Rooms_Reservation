@@ -1,0 +1,130 @@
+/* Navbar.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.90); 
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(49, 84, 252, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  background: linear-gradient(90deg, #3154FC 0%, #a18cd1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #555;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #3154FC;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #3154FC;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #66a6ff 0%, #89f7fe 100%);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(102, 166, 255, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(102, 166, 255, 0.5);
+}
+
+.btn-secondary {
+  color: #3154FC;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 18px;
+  border: 2px solid rgba(49, 84, 252, 0.15); 
+  border-radius: 25px;
+  transition: all 0.3s;
+  background: transparent;
+}
+
+.btn-secondary:hover {
+  border-color: #3154FC;
+  background: rgba(49, 84, 252, 0.05); 
+}
+
+.btn-logout {
+  background: transparent;
+  border: 1px solid #e1e4e8;
+  padding: 8px 15px;
+  border-radius: 20px;
+  color: #666;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-logout:hover {
+  background: #fff0f3; 
+  color: #d63384; 
+  border-color: #fbc2eb;
+}
+
+.user-greeting {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-right: 10px;
+  font-weight: 500;
+}

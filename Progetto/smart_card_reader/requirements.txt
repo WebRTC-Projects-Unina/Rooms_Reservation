@@ -1,0 +1,4 @@
+pyscard
+requests 
+cryptography
+python-dotenv

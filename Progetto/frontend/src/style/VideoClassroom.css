@@ -1,0 +1,140 @@
+/* VideoClassroom.css */
+
+.vc-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px; 
+    background-color: transparent; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #0a1540; 
+}
+
+.vc-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px; 
+    box-shadow: 0 10px 30px rgba(102, 166, 255, 0.1);
+    max-width: 500px;
+    width: 100%;
+    margin-top: 0; 
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.vc-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.6rem; 
+    font-weight: 800;
+    background: linear-gradient(90deg, #a18cd1 0%, #a1c4fd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.vc-header {
+    margin-bottom: 15px;
+    padding: 8px 20px;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(102, 166, 255, 0.1);
+    display: inline-block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: 1px solid #f0f4f8;
+}
+
+.vc-status-dot {
+    font-weight: 800;
+    margin-left: 8px;
+}
+
+.vc-video-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.vc-video-elem {
+    width: 100%; 
+    border-radius: 16px;
+    background: black;
+    margin-bottom: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.vc-controls {
+    margin-top: 10px;
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(102, 166, 255, 0.1);
+    display: inline-block;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid rgba(102, 166, 255, 0.1);
+}
+
+.vc-screen-active {
+    color: #3154FC;
+    font-weight: 700;
+    margin-top: 15px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.vc-btn {
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%; 
+    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.vc-btn:active {
+    transform: scale(0.98);
+}
+
+.vc-btn-primary { 
+    background: linear-gradient(90deg, #66a6ff 0%, #89f7fe 100%);
+    box-shadow: 0 4px 15px rgba(102, 166, 255, 0.4);
+}
+
+.vc-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 166, 255, 0.6);
+}
+
+.vc-btn-red { 
+    background-color: #fff0f3;
+    color: #d63384;
+    border: 1px solid #fbc2eb;
+}
+
+.vc-btn-red:hover {
+    background-color: #ffe0e9;
+}
+
+.vc-btn-green { 
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.vc-btn-green:hover {
+    background-color: #dcedc8;
+}

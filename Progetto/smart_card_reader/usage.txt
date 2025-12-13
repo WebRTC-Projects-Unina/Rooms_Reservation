@@ -1,0 +1,21 @@
+-- usage.txt
+-- usage for linux systems (tested on arch)
+
+1. install required package:
+    - sudo pacman -S pcscd-tools
+    - sudo pacman -S ccid
+2. start pcscd service: sudo systemctl start pcscd
+    1.1 add user to pcscd group (if error): sudo usermod -aG pcscd $USER
+    1.2 add user to lp gour (if error): sudo usermod -aG lp $USER
+3. remove kernel modules in conflict with reader:
+    - sudo modprobe -r pn533_usb
+    - sudo modprobe -r pn533
+    - sudo modprobe -r nfc
+    3.1 to make this changes permanent, create the file /etc/modprobe.d/blacklist-nfc.conf with:
+        blacklist pn533_usb
+        blacklist pn533
+        blacklist nfc
+4. test the reader: pcsc_scan    
+5. select python venv
+6. (optional) run python script to write the card uid
+7. start the local server
