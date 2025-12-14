@@ -4,13 +4,13 @@
 Il progetto combina tecnologie di sviluppo web moderne con meccanismi di comunicazione real-time (WebRTC) e integrazione IoT per il controllo accessi fisico.
 
 > **Corso:** Web and Real Time Communication Systems (2025/2026)
-> **Autori:** Annarita Fabiano (M63001789) e Giuseppe Maglione (M63001777)
 
 ## 📋 Indice
 - [Descrizione](#-descrizione)
 - [Architettura](#-architettura)
 - [Tecnologie Utilizzate](#-tecnologie-utilizzate)
 - [Setup e Avvio](#-setup-e-avvio)
+- [Autori](#-autori-)
 
 ## 📖 Descrizione
 
@@ -39,7 +39,7 @@ Il sistema segue un'architettura client-server composta da 5 componenti fondamen
 ## ⚙️ Setup e Avvio
 
 La guida sul setup dei requisiti necessari ad avviare l'applicazione è riportata sulla documentazione (`/Docs/documentaion.pdf`).
-> **Nota:** La guida è testata su Arch Linux. I comandi potrebbero variare su altre distribuzioni.
+> 💡 **Nota:** La guida è testata su Arch Linux. I comandi potrebbero variare su altre distribuzioni.
 
 Per avviare l'intero sistema, eseguire i componenti in terminali separati:
 
@@ -64,4 +64,8 @@ cd smart_card_reader
 python3 local_reader_service.py
 ```
 
-⚠️ **Importante**: Poiché vengono utilizzati certificati self-signed, al primo avvio è necessario visitare via browser gli indirizzi del Backend, del Frontend e del Media Server per accettare manualmente i certificati di sicurezza.
+> ⚠️ **Importante**: Poiché vengono utilizzati certificati self-signed, al primo avvio è necessario visitare via browser gli indirizzi del Backend, del Frontend e del Media Server per accettare manualmente i certificati di sicurezza.
+
+## 👥 Autori
+*  **Annarita Fabiano** (M63001789)
+*  **Giuseppe Maglione** (M63001777)
