@@ -29,6 +29,8 @@ Il sistema segue un'architettura client-server composta da 5 componenti fondamen
 4.  **Media Server (Janus Gateway):** Gestione dei flussi audio/video WebRTC tramite plugin *VideoRoom*.
 5.  **Local Room Server (Python):** Servizio in esecuzione sul lettore fisico che valida le smart card comunicando con il backend tramite messaggi firmati digitalmente.
 
+!(Docs/architecture-dark.png)
+
 ## 🛠 Tecnologie Utilizzate
 * **Frontend:** React, Vite, CSS Modules
 * **Backend:** Node.js, Express.js (MVC Pattern)
