@@ -81,6 +81,7 @@ export const checkAccess = async (req, res) => {
     }
 
     // 5. accesso consentito
+    await bookingModel.setCheckInStatus(booking.id);
     await logModel.createLog(card.id, reader.id, true, "Accesso consentito: Prenotazione valida");
     return sendSignedResponse(200, { access: true, message: "Accesso autorizzato" });
 

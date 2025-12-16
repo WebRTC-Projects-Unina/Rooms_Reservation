@@ -14,6 +14,15 @@ export const bookingModel = {
         return rows[0] || null;
     },
 
+    async setCheckInStatus(bookingId) {
+        const [result] = await pool.query(
+            `UPDATE bookings SET check_in = TRUE WHERE id = ?`,
+            [bookingId]
+        );
+
+        return result;
+    },
+
     async createBooking(userId, roomId, startTime, endTime) {
         const [result] = await pool.query(
             `INSERT INTO bookings (user_id, room_id, start_time, end_time, status)

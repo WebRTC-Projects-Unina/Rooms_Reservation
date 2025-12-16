@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Janus from '../utils/janus';
-import { apiPost } from '../api';
+import { apiPost, apiGet } from '../api';
 import '../style/VideoClassroom.css'; 
 
-const VideoClassroom = ({ role, roomId }) => {
+const VideoClassroom = ({ role, roomId, initialCheckIn = false }) => {
     const janusRef = useRef(null);
     const roomHandleRef = useRef(null);
     const subHandleRef = useRef(null);
@@ -19,7 +19,48 @@ const VideoClassroom = ({ role, roomId }) => {
     const [isScreenSharing, setIsScreenSharing] = useState(false);  // stato condivisione schermo
     const [isMuted, setIsMuted] = useState(false);                  // stato per mutare il microfono
 
+    // stati per il controllo check-in fisico
+    const [isCheckedIn, setIsCheckedIn] = useState(initialCheckIn); 
+    // se initialCheckIn è già true, non dobbiamo caricare (isLoadingCheck = false)
+    const [isLoadingCheck, setIsLoadingCheck] = useState(role === 'host' && !initialCheckIn); 
+
     const MY_ROOM_ID = parseInt(roomId);
+
+    // questa funzione serve a verificare se l'host ha fatto check-in
+    useEffect(() => {
+        let intervalId; 
+
+        const checkPhysicalPresence = async () => {
+            if (role !== 'host' || isCheckedIn) return;
+
+            try {
+                const booking = await apiGet(`/api/prenotazioni/${MY_ROOM_ID}`);
+                
+                if (booking && booking.check_in) {
+                    setIsCheckedIn(true);
+                    if (intervalId) clearInterval(intervalId);
+                } else {
+                    setIsCheckedIn(false);
+                }
+            } catch (err) {
+                console.warn("Check-in polling error:", err);
+            } finally {
+                setIsLoadingCheck(false);
+            }
+        };
+
+        // eseguiamo il controllo solo se l'utente non è già check-in
+        if (!isCheckedIn) {
+            checkPhysicalPresence();
+            if (role === 'host') {
+                intervalId = setInterval(checkPhysicalPresence, 3000);
+            }
+        }
+
+        return () => {
+            if (intervalId) clearInterval(intervalId);
+        };
+    }, [role, MY_ROOM_ID, isCheckedIn]);
 
     // questa funzione apre websocket verso la porta 8989 e crea una sessione
     const startJanus = () => {
@@ -34,6 +75,10 @@ const VideoClassroom = ({ role, roomId }) => {
                 // sessione
                 const janusInstance = new Janus({
                     server: "wss://localhost:8989",
+                    // aggiunto server di stun google per client
+                    iceServers: [
+            { urls: "stun:stun.l.google.com:19302" }
+              ],
                     success: () => {
                         janusRef.current = janusInstance;
                         setStatus("Connesso. Entro nella stanza...");
@@ -62,9 +107,15 @@ const VideoClassroom = ({ role, roomId }) => {
 
     // funzione per gestire il click "Avvia/Partecipa"
     const handleJoin = async () => {
+        // blocco se host non ha fatto check-in
+        if (role === 'host' && !isCheckedIn) {
+            alert("Devi prima passare il badge sul lettore all'ingresso dell'aula per confermare la presenza!");
+            return;
+        }
+
         setHasJoined(true);
 
-        // se sono HOST, chiedo al backend di creare la stanza su Janus
+        // se sono host, chiedo al backend di creare la stanza su Janus
         if (role === 'host') {
             try {
                 setStatus("Creazione stanza sul server...");
@@ -86,7 +137,7 @@ const VideoClassroom = ({ role, roomId }) => {
             }
         }
 
-        // se sono Guest o se l'Host ha creato la stanza con successo, avviamo WebRTC
+        // se sono Guest o se l'host ha creato la stanza con successo, avviamo WebRTC
         setStatus("Connessione in corso...");
         startJanus();
     };
@@ -257,13 +308,27 @@ const VideoClassroom = ({ role, roomId }) => {
                 <div className="vc-card">
                     <h1 className="vc-title">🎓 Aula Virtuale</h1>
                     <p>Stai per entrare nella riunione <b>#{roomId}</b>.</p>
-                    <button onClick={handleJoin} className="vc-btn vc-btn-primary">
-                        {role === 'host' ? '🎙️ Avvia riunione' : '🎧 Partecipa alla riunione'}
-                    </button>
+                    
+                    {/* mostriamo avviso se l'host non è entrato in aula (check-in) */}
+                    {role === 'host' && !isLoadingCheck && !isCheckedIn ? (
+                        <div style={{ color: 'red', fontWeight: 'bold', border: '1px solid red', padding: '10px', borderRadius: '5px', backgroundColor: '#fff0f0' }}>
+                            ⛔ Accesso fisico non rilevato.<br/>
+                            Per avviare la riunione passare la carta sul lettore.
+                        </div>
+                    ) : (
+                        <button 
+                            onClick={handleJoin} 
+                            className="vc-btn vc-btn-primary"
+                            disabled={isLoadingCheck} // disabilitato solo mentre carica
+                        >
+                            {isLoadingCheck ? 'Verifica accesso...' : (role === 'host' ? '🎙️ Avvia riunione' : '🎧 Partecipa alla riunione')}
+                        </button>
+                    )}
+
                 </div>
             </div>
         );
-    }
+    };
 
     return (
         <div className="vc-container">

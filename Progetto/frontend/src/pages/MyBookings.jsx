@@ -111,6 +111,8 @@ export default function MyBookings() {
                     {list.map((b, index) => {
 
                         const active = isBookingActive(b.start_time, b.end_time);
+                        // controllo check-in
+                        const hasCheckedIn = !!b.check_in; 
 
                         return (
                             <div key={b.id} className="booking-card">
@@ -130,7 +132,7 @@ export default function MyBookings() {
                                     {streamingId === b.id ? (
                                         <div className="streaming-active-area" style={{ marginBottom: "15px" }}>
                                             {/* host */}
-                                            <VideoClassroom role="host" roomId={b.id} />
+                                            <VideoClassroom role="host" roomId={b.id} initialCheckIn={true} />
                                             <button
                                                 onClick={() => setStreamingId(null)}
                                                 className="btn-action"
@@ -156,6 +158,7 @@ export default function MyBookings() {
                                             {/* bottone per avviare lo streaming (solo se attiva in questo momento) */}
                                             <div style={{ marginTop: "15px", borderTop: "1px solid #eee", paddingTop: "10px" }}>
 
+                                                {/* csao 1: riunione non attiva per orario */}
                                                 {!active && (
                                                     <button
                                                         className="btn-action"
@@ -170,7 +173,33 @@ export default function MyBookings() {
                                                     </button>
                                                 )}
 
-                                                {active && (
+                                                {/* caso 2: riunione attiva ma check-in mancante */}
+                                                {active && !hasCheckedIn && (
+                                                    <div style={{ textAlign: 'center' }}>
+                                                        <div style={{ 
+                                                            color: '#e74c3c', 
+                                                            fontWeight: 'bold', 
+                                                            fontSize: '0.9em', 
+                                                            marginBottom: '5px',
+                                                            border: '1px solid #e74c3c',
+                                                            padding: '5px',
+                                                            borderRadius: '5px',
+                                                            backgroundColor: '#fff5f5'
+                                                        }}>
+                                                            ⛔ Accesso fisico non rilevato.<br/>Entra in aula per avviare la riunione.
+                                                        </div>
+                                                        {/* bottone "Ricarica stato" opzionale, per evitare refresh intera pagina */}
+                                                        <button 
+                                                            onClick={load} 
+                                                            style={{ fontSize: '0.8em', textDecoration: 'underline', background: 'none', border: 'none', color: '#666', cursor: 'pointer' }}
+                                                        >
+                                                            🔄 Aggiorna stato
+                                                        </button>
+                                                    </div>
+                                                )}
+
+                                                {/* caso 3: riunione attiva e check-in fatto */}
+                                                {active && hasCheckedIn && (
                                                     <button
                                                         onClick={() => {
                                                             setStreamingId(b.id);

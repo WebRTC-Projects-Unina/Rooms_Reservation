@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS bookings (
     start_time DATETIME NOT NULL,
     end_time DATETIME NOT NULL,
     status ENUM('active', 'cancelled') DEFAULT 'active',
+    check_in BOOLEAN DEFAULT FALSE,     -- flag se l'utente è entrato in aula (accesso fisico)
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     -- TBD: aggiungere il flag "conference", per fare lo streaming della riunione
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
