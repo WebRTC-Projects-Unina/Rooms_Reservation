@@ -3,6 +3,8 @@
 **SpaceHub** è un'applicazione web interattiva progettata per la gestione delle prenotazioni delle aule e lo streaming delle riunioni svolte al loro interno.
 Il progetto combina tecnologie di sviluppo web moderne con meccanismi di comunicazione real-time (WebRTC) e integrazione IoT per il controllo accessi fisico.
 
+> 💡 Per una descrizione completa sul funzionamento della web app e dei suoi componenti fare riferimento alla documentazione (`/Docs/documentaion.pdf`).
+
 > **Corso:** Web and Real Time Communication Systems (2025/2026)
 
 ## 📋 Indice
